@@ -30,68 +30,70 @@ class _PlaylistState extends State<Playlist> {
         Navigator.of(context).pop();
       },  icon: Icon(Icons.arrow_back_ios))),
       body: SafeArea(
-        child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.all(10),
-            child: ValueListenableBuilder(
-                valueListenable: playlistBox.listenable(),
-                builder: (context, boxSongList, _) {
-                  final List<dynamic> keys = playlistBox.keys.toList();
-
-                  keys.removeWhere((key) => key == 'Favourites');
-                  keys.removeWhere((key) => key == 'Recent');
-                  keys.removeWhere((key) => key == 'Most Played');
-                  // return Cards(Keyname: keys[0].toString(),);
-                  return (keys.isEmpty)
-                      ? Container(
-                          margin: EdgeInsets.only(top: 300),
-                          child: Center(
-                              child: Text(
-                            'Playlist is empty',
-                            style: TextStyle(color: Colors.white, fontSize: 25),
-                          )),
-                        )
-                      : GridView.builder(
-                          itemCount: keys.length,
-                          shrinkWrap: true,
-                          physics: const ScrollPhysics(),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 15,
-                            crossAxisSpacing: 15,
-                            childAspectRatio: 1.25,
-                          ),
-                          itemBuilder: (context, index) {
-                            final String playlistName = keys[index];
-
-                            final List<Songs> songList = playlistBox
-                                .get(playlistName)!
-                                .toList()
-                                .cast<Songs>();
-
-                            final int songListlength = songList.length;
-
-                            return InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => PlaylistScreen(
-                                        Playlistname: keys[index]),
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: ValueListenableBuilder(
+                  valueListenable: playlistBox.listenable(),
+                  builder: (context, boxSongList, _) {
+                    final List<dynamic> keys = playlistBox.keys.toList();
+        
+                    keys.removeWhere((key) => key == 'Favourites');
+                    keys.removeWhere((key) => key == 'Recent');
+                    keys.removeWhere((key) => key == 'Most Played');
+                    // return Cards(Keyname: keys[0].toString(),);
+                    return (keys.isEmpty)
+                        ? Container(
+                            margin: EdgeInsets.only(top: 300),
+                            child: Center(
+                                child: Text(
+                              'Playlist is empty',
+                              style: TextStyle(color: Colors.white, fontSize: 25),
+                            )),
+                          )
+                        : GridView.builder(
+                            itemCount: keys.length,
+                            shrinkWrap: true,
+                            physics: const ScrollPhysics(),
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              mainAxisSpacing: 15,
+                              crossAxisSpacing: 15,
+                              childAspectRatio: 1.25,
+                            ),
+                            itemBuilder: (context, index) {
+                              final String playlistName = keys[index];
+        
+                              final List<Songs> songList = playlistBox
+                                  .get(playlistName)!
+                                  .toList()
+                                  .cast<Songs>();
+        
+                              final int songListlength = songList.length;
+        
+                              return InkWell(
+                                  onTap: () {
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => PlaylistScreen(
+                                          Playlistname: keys[index]),
+                                    ));
+                                  },
+                                  onLongPress: () {
+                                    playlistdelete(
+                                        context: context,
+                                        playlistname: keys[index]);
+                                  },
+                                  child: Cards(
+                                    Keyname: keys[index].toString(),
                                   ));
-                                },
-                                onLongPress: () {
-                                  playlistdelete(
-                                      context: context,
-                                      playlistname: keys[index]);
-                                },
-                                child: Cards(
-                                  Keyname: keys[index].toString(),
-                                ));
-                          },
-                        );
-                }),
-          ),
-        ]),
+                            },
+                          );
+                  }),
+            ),
+          ]),
+        ),
       ),
       floatingActionButton: CircleAvatar(
         radius: 30,

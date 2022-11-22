@@ -1,6 +1,7 @@
 
 
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio/just_audio.dart';
@@ -37,27 +38,21 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          //  Navigator.of(context).pop();
-                          Navigator.of(context).pushAndRemoveUntil(
-                              MaterialPageRoute(
-                                builder: (context) => HomeScreen(),
-                              ),
-                              (route) => false);
-                        },
-                        icon: Icon(Icons.arrow_back_ios),
-                        color: Colors.white,
-                      ),
-
-                    ],
+                  IconButton(
+                    onPressed: () {
+                        // Navigator.of(context).pop();
+                      Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                            builder: (context) => HomeScreen(),
+                          ),
+                          (route) => false);
+                    },
+                    icon: Icon(Icons.arrow_back_ios),
+                    color: Colors.white,
                   ),
                   IconButton(onPressed: () {
                     popupsonginplaylist(contex: context,Playlistname: widget.Playlistname);
-                  }, icon:Icon(Icons.music_note),color: Colors.white,),
+                  }, icon:Icon(CupertinoIcons.music_note_list),color: Colors.white,),
                   
                   Text(
                     widget.Playlistname,
@@ -81,49 +76,49 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
               SizedBox(
                 height: 20,
               ),
-              Expanded(
-                child: ListView(
-                  children: [
-                    ValueListenableBuilder(
-                      valueListenable: PlaylistBox.listenable(),
-                      builder: (BuildContext context, Box<List> value,
-                          Widget? child) {
-                          
-                        List<Songs>  PlaylistSongs = PlaylistBox.get(widget.Playlistname)!
-
-                            .toList()
-                            .cast<Songs>();
-
-                        return (PlaylistSongs.isEmpty)
-                            ? Container(
-                                     margin: EdgeInsets.only(top: 300),
-                              child: Center(
-                                  child: Text(
-                                  'Add Your Favotite Songs',
-                                  style: TextStyle(color: Colors.white,fontSize: 25),
-                                )),
-                            )
-                            : ListView.builder(
-                                itemCount:PlaylistSongs.length,
-                                shrinkWrap: true,
-                                physics: ScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return SongListTile(
-                                    onPressed: () {
-                                      removesongfromplaylist(playlistname: widget.Playlistname,id: PlaylistSongs[index].songid!,context: context);
-                                    },
-                                    songList: PlaylistSongs,
-                                    index: index,
-                                    audioPlayer: audioPlayer,
-                                    icon: Icons.remove_circle_outline_outlined,
-                                  );
+        Expanded(
+            child: ListView(
+              children: [
+                ValueListenableBuilder(
+                  valueListenable: PlaylistBox.listenable(),
+                  builder: (BuildContext context, Box<List> value,
+                      Widget? child) {
+                      
+                    List<Songs>  PlaylistSongs = PlaylistBox.get(widget.Playlistname)!
+                
+                        .toList()
+                        .cast<Songs>();
+                
+                    return (PlaylistSongs.isEmpty)
+                        ? Container(
+                                 margin: EdgeInsets.only(top: 300),
+                          child: Center(
+                              child: Text(
+                              'Add Your Favotite Songs',
+                              style: TextStyle(color: Colors.white,fontSize: 25),
+                            )),
+                        )
+                        : ListView.builder(
+                            itemCount:PlaylistSongs.length,
+                            shrinkWrap: true,
+                            physics: ScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return SongListTile(
+                                onPressed: () {
+                                  removesongfromplaylist(playlistname: widget.Playlistname,id: PlaylistSongs[index].songid!,context: context);
                                 },
+                                songList: PlaylistSongs,
+                                index: index,
+                                audioPlayer: audioPlayer,
+                                icon: Icons.remove_circle_outline_outlined,
                               );
-                      },
-                    ),
-                  ],
+                            },
+                          );
+                  },
                 ),
-              ),
+              ],
+            ),
+          ),
             ],
           ),
         ),

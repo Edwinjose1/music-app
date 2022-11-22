@@ -92,7 +92,7 @@ showPlaylistModalSheet({
                                 ),
                                 child: ListTile(
                                   onTap: () async {
-                                    UserPlaylist.addSongToPlaylist( 
+                                    UserPlaylist.addSongToPlaylist(
                                         context: context,
                                         songId: song.songid.toString(),
                                         playlistName: playlistKey);
@@ -144,7 +144,8 @@ showCreatingPlaylistDialoge({required BuildContext context}) {
               style: TextStyle(
                   color: Colors.grey,
                   fontSize: 16,
-                  fontWeight: FontWeight.w600,fontStyle: FontStyle.italic),
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic),
             ),
             content: SearchField(
               textController: textEditingController,
@@ -210,12 +211,21 @@ playlistdelete({required BuildContext context, required String playlistname}) {
             actions: [
               TextButton(
                 onPressed: () {
-                   Navigator.pop(ctx);
+                  Navigator.pop(ctx);
                 },
                 child: const Text(
-                  
                   'Cancel',
                   style: TextStyle(color: Colors.blue, fontSize: 15),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  editPlaylistname(
+                      context: context, playlistname: playlistname);
+                },
+                child: const Text(
+                  'Edit Playlist Name',
+                  style: TextStyle(color: Colors.red, fontSize: 15),
                 ),
               ),
               TextButton(
@@ -238,11 +248,11 @@ removesongfromplaylist(
     {required BuildContext context,
     required String playlistname,
     required int id}) {
-     final Box<List> PlaylistBox = getPlaylistBox();
-    final List<Songs> songList =
-       PlaylistBox.get(playlistname)!.toList().cast<Songs>();
-    final Songs DeleteMusicRef =
-        songList.firstWhere((song) => song.songPath.contains(id.toString()));
+  final Box<List> PlaylistBox = getPlaylistBox();
+  final List<Songs> songList =
+      PlaylistBox.get(playlistname)!.toList().cast<Songs>();
+  final Songs DeleteMusicRef =
+      songList.firstWhere((song) => song.songPath.contains(id.toString()));
 
   return showDialog(
       context: context,
@@ -262,7 +272,9 @@ removesongfromplaylist(
             ),
             actions: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(ctx);
+                },
                 child: const Text(
                   'Cancel',
                   style: TextStyle(color: Colors.blue, fontSize: 15),
@@ -270,10 +282,9 @@ removesongfromplaylist(
               ),
               TextButton(
                 onPressed: () async {
-                  
-                   songList.remove(DeleteMusicRef);
-      await PlaylistBox.put(playlistname, songList);
-                 
+                  songList.remove(DeleteMusicRef);
+                  await PlaylistBox.put(playlistname, songList);
+
                   Navigator.pop(ctx);
                 },
                 child: const Text(
@@ -286,40 +297,122 @@ removesongfromplaylist(
         );
       });
 }
-popupsonginplaylist({required BuildContext contex,required  String Playlistname})
-{
 
-showModalBottomSheet(context: contex, builder: (context) {
-  
-  final Box<List> PlaylistBox = getPlaylistBox();
-  final Box<Songs> songBox=getSongBox();
-   List<Songs> songList = songBox.values.toList().cast<Songs>();
-   AssetsAudioPlayer assetsAudioPlayer=AssetsAudioPlayer.withId('0');
-   return Container(
-    color: Colors.black,
-     child: ListView.builder(
-      
-                  itemCount: songList.length,
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return SongListTile(
-                      icon: Icons.add_circle_outline_rounded,
-                      onPressed: () {
-                       UserPlaylist.addSongToPlaylist(
-                                          context: context,
-                                          songId: songList[index].songid.toString(),
-                                          playlistName:Playlistname );
+popupsonginplaylist(
+    {required BuildContext contex, required String Playlistname}) {
+  showModalBottomSheet(
+    context: contex,
+    builder: (context) {
+      final Box<List> PlaylistBox = getPlaylistBox();
+      final Box<Songs> songBox = getSongBox();
+      List<Songs> songList = songBox.values.toList().cast<Songs>();
+      AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer.withId('0');
+      return Container(
+        color: Colors.black,
+        child: ListView.builder(
+          itemCount: songList.length,
+          shrinkWrap: true,
+          physics: ScrollPhysics(),
+          itemBuilder: (context, index) {
+            return SongListTile(
+              icon: Icons.add_circle_outline_rounded,
+              onPressed: () {
+                UserPlaylist.addSongToPlaylist(
+                    context: context,
+                    songId: songList[index].songid.toString(),
+                    playlistName: Playlistname);
 
-                                          Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
+              index: index,
+              songList: songList,
+              audioPlayer: assetsAudioPlayer,
+            );
+          },
+        ),
+      );
+    },
+  );
+}
 
-                      },
-                      index: index,
-                      songList: songList,
-                      audioPlayer: assetsAudioPlayer,
-                    );
-                  },
+editPlaylistname(
+    {required BuildContext context, required String playlistname}) {
+  TextEditingController textEditingController = TextEditingController(text: playlistname);
+  Box<List> playlistBox = getPlaylistBox();
+
+  Future<void> createNewplaylistname() async {
+    List<Songs> songList = [];
+    final String playlistName = textEditingController.text.trim();
+    if (playlistName.isEmpty) {
+      return;
+    }
+    List<Songs> PlaylistSongs =
+        playlistBox.get(playlistname)!.toList().cast<Songs>();
+        songList=PlaylistSongs;
+        await playlistBox.put(playlistName, songList);
+        await playlistBox.delete(playlistname);
+        Navigator.of(context).pop();
+        
+  }
+
+  return showDialog(
+      context: context,
+      builder: (BuildContext ctx) {
+        final formKey = GlobalKey<FormState>();
+        return Form(
+          key: formKey,
+          child: AlertDialog(
+            backgroundColor: Colors.black,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            title: const Text(
+              'Create playlist',
+              style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic),
+            ),
+            content: SearchField(
+              textController: textEditingController,
+              hintText: 'Playlist Name',
+              icon: Icons.playlist_add,
+              validator: (value) {
+                final keys = getPlaylistBox().keys.toList();
+                if (value == null || value.isEmpty) {
+                  return 'Field is empty';
+                }
+                if (keys.contains(value)) {
+                  return '$value Already exist in playlist';
+                }
+                return null;
+              },
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                },
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.grey, fontSize: 15),
                 ),
-   );
-},);
+              ),
+              TextButton(
+                onPressed: () async {
+                  if (formKey.currentState!.validate()) {
+                    await createNewplaylistname();
+                    Navigator.pop(ctx);
+                  }
+                },
+                child: const Text(
+                  'Confirm',
+                  style: TextStyle(color: Colors.grey, fontSize: 15),
+                ),
+              ),
+            ],
+          ),
+        );
+      });
 }
