@@ -11,19 +11,20 @@ class Navbar extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 80,
-      color:Colors.grey,
-      child: ListTile(onTap: () {
-       
-      },
-        title:Text('First music') ,
-                subtitle: Text("subtitle"),
-                leading: CircleAvatar(backgroundColor: Colors.black,radius: 30,backgroundImage:AssetImage('assets/images/songimg4.jpg') ),
-                trailing: Icon(Icons.play_arrow)
-      ),
+      color: Colors.grey,
+      child: ListTile(
+          onTap: () {},
+          title: Text('First music'),
+          subtitle: Text("subtitle"),
+          leading: CircleAvatar(
+              backgroundColor: Colors.black,
+              radius: 30,
+              backgroundImage: AssetImage('assets/images/songimg4.jpg')),
+          trailing: Icon(Icons.play_arrow)),
     );
-    
   }
-   @override
+
+  @override
   // TODO: implement preferredSize
   Size get preferredSize => const Size.fromHeight(500);
 }

@@ -15,7 +15,8 @@ class Favourites {
     final List<Songs> favSongList =
         playlistBox.get('Favourites')!.toList().cast<Songs>();
 
-    final Songs favSong = allSongs.firstWhere((song) => song.songid.toString().contains(id.toString()));
+    final Songs favSong = allSongs
+        .firstWhere((song) => song.songid.toString().contains(id.toString()));
 
     if (favSongList.where((song) => song.songid == favSong.songid).isEmpty) {
       favSongList.add(favSong);
@@ -39,7 +40,8 @@ class Favourites {
     List<Songs> favSongList =
         playlistBox.get('Favourites')!.toList().cast<Songs>();
 
-    Songs favSong = allSongs.firstWhere((song) => song.songid.toString().contains(id.toString()));
+    Songs favSong = allSongs
+        .firstWhere((song) => song.songid.toString().contains(id.toString()));
     return favSongList.where((song) => song.songid == favSong.songid).isEmpty
         ? Icons.favorite_outline_rounded
         : Icons.favorite_rounded;
@@ -56,7 +58,7 @@ class Favourites {
               topLeft: Radius.circular(20), topRight: Radius.circular(20)),
         ),
         duration: const Duration(seconds: 1),
-        backgroundColor:Colors.black26,
+        backgroundColor: Colors.black26,
         content: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

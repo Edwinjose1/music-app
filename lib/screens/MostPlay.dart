@@ -14,7 +14,7 @@ class MostPlayedSongs extends StatefulWidget {
 }
 
 class _MostPlayedSongsState extends State<MostPlayedSongs> {
- final audioPlayer = AssetsAudioPlayer.withId('0');
+  final audioPlayer = AssetsAudioPlayer.withId('0');
 
   Box<List> PlaylistBox = getPlaylistBox();
 
@@ -56,15 +56,15 @@ class _MostPlayedSongsState extends State<MostPlayedSongs> {
                         fontSize: 38,
                         fontWeight: FontWeight.w500),
                   ),
-                  ValueListenableBuilder(
+                  ValueListenableBuilder( 
                     valueListenable: PlaylistBox.listenable(),
                     builder: (context, value, child) {
                       return Text(
-                      '${PlaylistBox.get('Most Played')?.toList().length} Songs',
-                      style: TextStyle(color: Color(0xFFC87DFF), fontSize: 15),
-                    );
+                        '${PlaylistBox.get('Most Played')?.toList().length} Songs',
+                        style:
+                            TextStyle(color: Color(0xFFC87DFF), fontSize: 15),
+                      );
                     },
-                   
                   ),
                 ],
               ),
@@ -78,9 +78,7 @@ class _MostPlayedSongsState extends State<MostPlayedSongs> {
                       valueListenable: PlaylistBox.listenable(),
                       builder: (BuildContext context, Box<List> value,
                           Widget? child) {
-                          
                         List<Songs> Recentlist = PlaylistBox.get('Most Played')!
-                            .reversed
                             .toList()
                             .cast<Songs>();
 

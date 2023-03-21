@@ -31,17 +31,16 @@ class SettingScreen extends StatelessWidget {
               ],
             ),
             Text(
-        
-        'Settings',
-        style: TextStyle(
-            fontSize: 40,
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-            fontStyle: FontStyle.normal),
-            
-
-      ),
-      SizedBox(height: 50,),
+              'Settings',
+              style: TextStyle(
+                  fontSize: 40,
+                  color: Colors.white,
+                  fontWeight: FontWeight.w400,
+                  fontStyle: FontStyle.normal),
+            ),
+            SizedBox(
+              height: 50,
+            ),
             ListTile(
               leading: Icon(
                 Icons.privacy_tip_sharp,

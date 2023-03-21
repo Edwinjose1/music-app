@@ -24,11 +24,14 @@ class _PlaylistState extends State<Playlist> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: Colors.black,
-      appBar: AppBar(backgroundColor: Colors.black,leading: IconButton(onPressed:() {
-        Navigator.of(context).pop();
-      },  icon: Icon(Icons.arrow_back_ios))),
+      appBar: AppBar(
+          backgroundColor: Colors.black,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: Icon(Icons.arrow_back_ios))),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(children: [
@@ -38,7 +41,7 @@ class _PlaylistState extends State<Playlist> {
                   valueListenable: playlistBox.listenable(),
                   builder: (context, boxSongList, _) {
                     final List<dynamic> keys = playlistBox.keys.toList();
-        
+
                     keys.removeWhere((key) => key == 'Favourites');
                     keys.removeWhere((key) => key == 'Recent');
                     keys.removeWhere((key) => key == 'Most Played');
@@ -49,7 +52,8 @@ class _PlaylistState extends State<Playlist> {
                             child: Center(
                                 child: Text(
                               'Playlist is empty',
-                              style: TextStyle(color: Colors.white, fontSize: 25),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 25),
                             )),
                           )
                         : GridView.builder(
@@ -65,17 +69,18 @@ class _PlaylistState extends State<Playlist> {
                             ),
                             itemBuilder: (context, index) {
                               final String playlistName = keys[index];
-        
+
                               final List<Songs> songList = playlistBox
                                   .get(playlistName)!
                                   .toList()
                                   .cast<Songs>();
-        
+
                               final int songListlength = songList.length;
-        
+
                               return InkWell(
                                   onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
                                       builder: (context) => PlaylistScreen(
                                           Playlistname: keys[index]),
                                     ));
@@ -96,8 +101,8 @@ class _PlaylistState extends State<Playlist> {
         ),
       ),
       floatingActionButton: CircleAvatar(
-        radius: 30,
-        backgroundColor: Colors.white,
+          radius: 30,
+          backgroundColor: Colors.white,
           child: IconButton(
               onPressed: (() => showCreatingPlaylistDialoge(context: context)),
               icon: Icon(Icons.add))),

@@ -39,58 +39,56 @@ class _HomeScreenState extends State<HomeScreen> {
     // List<Song> songs = Song.songs;   >>this code may be used later
     List<Songs> songList = songBox.values.toList().cast<Songs>();
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      backgroundColor: Colors.black,
-      appBar: const Appbar(),
-      // bottomNavigationBar: Navbar(),
-      drawer: _Drawer(),
-      body: 
-           ListView(
-        children: [
-          DiscoverMusic(),
-          SizedBox(height: 20),
-          HorzotallistHome(),
-          AllsongHeading(),
-          ValueListenableBuilder(
-            valueListenable: songBox.listenable(),
-            builder: (context, Box<Songs> Songs, Widget? child) {
-              // final keys = Songs.keys.toList();
-              final screenHeight = MediaQuery.of(context).size.height;
-              if (Songs.values == null) {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (Songs.values.isEmpty) {
-                return Center(
-                    child: Text(
-                  'No Songs Identified',
-                  style: TextStyle(color: Colors.white),
-                ));
-              }
-              return ListView.builder(
-                itemCount: songList.length,
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return SongListTile(
-                    onPressed: () {
-                      showPlaylistModalSheet(
-                          context: context,
-                          screenHeight: 30,
-                          song: songList[index]);
-                    },
-                    index: index,
-                    songList: songList,
-                    audioPlayer: assetauidioplayer,
+        extendBodyBehindAppBar: true,
+        backgroundColor: Colors.black,
+        appBar: const Appbar(),
+        // bottomNavigationBar: Navbar(),
+        drawer: _Drawer(),
+        body: ListView(
+          children: [
+            DiscoverMusic(),
+            SizedBox(height: 20),
+            HorzotallistHome(),
+            AllsongHeading(),
+            ValueListenableBuilder(
+              valueListenable: songBox.listenable(),
+              builder: (context, Box<Songs> Songs, Widget? child) {
+                // final keys = Songs.keys.toList();
+                final screenHeight = MediaQuery.of(context).size.height;
+                if (Songs.values == null) {
+                  return Center(
+                    child: CircularProgressIndicator(),
                   );
-                },
-              );
-            },
-          ),
-        ],
-      ));
-    
+                }
+                if (Songs.values.isEmpty) {
+                  return Center(
+                      child: Text(
+                    'No Songs Identified',
+                    style: TextStyle(color: Colors.white),
+                  ));
+                }
+                return ListView.builder(
+                  itemCount: songList.length,
+                  shrinkWrap: true,
+                  physics: ScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return SongListTile(
+                      onPressed: () {
+                        showPlaylistModalSheet(
+                            context: context,
+                            screenHeight: 30,
+                            song: songList[index]);
+                      },
+                      index: index,
+                      songList: songList,
+                      audioPlayer: assetauidioplayer,
+                    );
+                  },
+                );
+              },
+            ),
+          ],
+        ));
   }
 
   void _showPopupMenu() async {

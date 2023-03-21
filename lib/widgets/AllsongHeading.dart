@@ -10,14 +10,12 @@ class AllsongHeading extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(left: 20),
       child: Text(
-        
         ' All Songs',
         style: TextStyle(
             fontSize: 40,
             color: Colors.white,
             fontWeight: FontWeight.w300,
             fontStyle: FontStyle.italic),
-
       ),
     );
   }

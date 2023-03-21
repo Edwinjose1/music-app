@@ -13,9 +13,17 @@ class DiscoverMusic extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Welcome',
-            style: Theme.of(context).textTheme.bodyLarge,
+          Row(
+            children: [
+              Text(
+                'Welcome',
+              
+                style: Theme.of(context).textTheme.bodyLarge,
+                
+              ),
+              SizedBox(width: 10,),
+              Text("Edusac",style:TextStyle(color: Color.fromARGB(66, 192, 163, 163)),)
+            ],
           ),
           const SizedBox(
             height: 15,
@@ -32,11 +40,21 @@ class DiscoverMusic extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white),
-                child: Row(children: [
-                  SizedBox(width: 30,),
-                  Icon(Icons.search),SizedBox(width: 10,),
-                  Text('Search Songs',style: TextStyle(color: Colors.black),)
-                ],),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Icon(Icons.search),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Search Songs',
+                      style: TextStyle(color: Colors.black),
+                    )
+                  ],
+                ),
               ))
         ],
       ),

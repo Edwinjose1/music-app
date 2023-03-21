@@ -57,10 +57,7 @@ class _SongListTileState extends State<SongListTile> {
             audioPlayer: audioPlayer,
             songList: widget.songList);
       },
-      
-    
-      contentPadding: 
-       const EdgeInsets.only(left: 10),
+      contentPadding: const EdgeInsets.only(left: 10),
       leading: QueryArtworkWidget(
         artworkBorder: BorderRadius.circular(10),
         id: widget.songList[widget.index].songid!,
@@ -108,8 +105,6 @@ class _SongListTileState extends State<SongListTile> {
             ),
           ),
 
-
-          
           IconButton(
             onPressed: () {
               Favourites.addSongToFavourites(

@@ -5,7 +5,7 @@ import 'package:music_app/model/dataBaseFunctions/db_functions.dart';
 import '../model/song_model.dart';
 
 class UserPlaylist {
-  static final Box<List> playlistBox = getPlaylistBox();
+  static final Box<List> playlistBox = getPlaylistBox();                                 
   static final Box<Songs> songBox = getSongBox();
 
   static addSongToPlaylist({
@@ -17,7 +17,8 @@ class UserPlaylist {
         playlistBox.get(playlistName)!.toList().cast<Songs>();
 
     List<Songs> allSongs = songBox.values.toList().cast<Songs>();
-    Songs song = allSongs.firstWhere((element) => element.songid.toString().contains(songId));
+    Songs song = allSongs
+        .firstWhere((element) => element.songid.toString().contains(songId));
 
     if (playlistSongs.contains(song)) {
       showPlaylistSnackbar(
@@ -33,8 +34,6 @@ class UserPlaylist {
           message: 'Added to the Playlist');
     }
   }
-
-  
 
   static void showPlaylistSnackbar({
     required BuildContext context,

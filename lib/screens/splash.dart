@@ -26,11 +26,8 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
   late Animation<double> animation1;
 
   Box<Songs> songBox = getSongBox();
-  Box<List> playlistBox=getPlaylistBox();
-  
+  Box<List> playlistBox = getPlaylistBox();
 
-
-  
   final OnAudioQuery audioQuery = OnAudioQuery();
 
   @override
@@ -69,6 +66,7 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
     }
     for (var audio in sortedSongs) {
       final song = Songs(
+        
         songPath: audio.uri!,
         songTitle: audio.title,
         songArtist: audio.artist!,
@@ -81,14 +79,12 @@ class _MyCustomSplashScreenState extends State<MyCustomSplashScreen>
     } else {
       print('Song box is not empty ${songBox.length}');
     }
-     getFavSongs();
-      getRecentSongs();
-      getMostplayedSongs();
-
-
-
+    getFavSongs();
+    getRecentSongs();
+    getMostplayedSongs();
   }
-Future getFavSongs() async {
+
+  Future getFavSongs() async {
     if (!playlistBox.keys.contains('Favourites')) {
       await playlistBox.put('Favourites', []);
     }
@@ -105,6 +101,7 @@ Future getFavSongs() async {
       await playlistBox.put('Most Played', []);
     }
   }
+
   void SplashScreenAnimation() {
     _controller =
         AnimationController(vsync: this, duration: Duration(seconds: 3));
@@ -154,8 +151,10 @@ Future getFavSongs() async {
       backgroundColor: Colors.black,
       body: Stack(
         children: [
-          Column(
+          ListView(
+            
             children: [
+            
               AnimatedContainer(
                   duration: Duration(milliseconds: 2000),
                   curve: Curves.fastLinearToSlowEaseIn,
@@ -163,13 +162,23 @@ Future getFavSongs() async {
               AnimatedOpacity(
                 duration: Duration(milliseconds: 2000),
                 opacity: _textOpacity,
-                child: Text(
-                  '',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: animation1.value,
+                child: Center(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Text(
+                          'Musicz',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 39, 177, 161),
+                            fontWeight: FontWeight.bold,
+                            fontSize: animation1.value,
+                          ),
+                        ),
+                        Icon(Icons.music_note,size: 50.5,color: Colors.white,)
+                      ],
+                    ),
                   ),
+                  
                 ),
               ),
             ],
@@ -186,7 +195,7 @@ Future getFavSongs() async {
                 width: _width / _containerSize,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 7, 7, 7),
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Image.asset('assets/images/splashscreenlogo.jpg'),

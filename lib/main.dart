@@ -13,11 +13,10 @@ Future<void> main() async {
   await Hive.initFlutter();
   if (!Hive.isAdapterRegistered(0)) {
     Hive.registerAdapter(SongsAdapter());
-    
   }
-   await Hive.openBox<Songs>("Allsongs");
-   await Hive.openBox<List>('Playlist');
- 
+  await Hive.openBox<Songs>("Allsongs");
+  await Hive.openBox<List>('Playlist');
+
   runApp(MyApp());
 }
 

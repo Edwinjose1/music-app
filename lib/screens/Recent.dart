@@ -17,7 +17,7 @@ class RecentSongs extends StatefulWidget {
 }
 
 class _RecentSongsState extends State<RecentSongs> {
- final audioPlayer = AssetsAudioPlayer.withId('0');
+  final audioPlayer = AssetsAudioPlayer.withId('0');
 
   Box<List> PlaylistBox = getPlaylistBox();
 
@@ -26,7 +26,7 @@ class _RecentSongsState extends State<RecentSongs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Colors.black,
+      backgroundColor: Colors.black,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -62,12 +62,12 @@ class _RecentSongsState extends State<RecentSongs> {
                   ValueListenableBuilder(
                     valueListenable: PlaylistBox.listenable(),
                     builder: (context, value, child) {
-                     return Text(
-                      '${PlaylistBox.get('Recent')?.toList().length} Songs',
-                      style: TextStyle(color: Color(0xFFC87DFF), fontSize: 15),
-                    );
+                      return Text(
+                        '${PlaylistBox.get('Recent')?.toList().length} Songs',
+                        style:
+                            TextStyle(color: Color(0xFFC87DFF), fontSize: 15),
+                      );
                     },
-                    
                   ),
                 ],
               ),
@@ -81,11 +81,8 @@ class _RecentSongsState extends State<RecentSongs> {
                       valueListenable: PlaylistBox.listenable(),
                       builder: (BuildContext context, Box<List> value,
                           Widget? child) {
-                          
-                        List<Songs> Recentlist = PlaylistBox.get('Recent')!
-                            .reversed
-                            .toList()
-                            .cast<Songs>();
+                        List<Songs> Recentlist =
+                            PlaylistBox.get('Recent')!.toList().cast<Songs>();
 
                         return (Recentlist.isEmpty)
                             ? Center(

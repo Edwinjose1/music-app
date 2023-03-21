@@ -7,9 +7,13 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:music_app/Function/recent.dart';
+import 'package:music_app/lyrics_rep/api.dart';
 import 'package:music_app/model/song_model.dart';
+import 'package:music_app/screens/Screenlyrics.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 import 'package:text_scroll/text_scroll.dart';
+
+
 
 class PlaySong extends StatefulWidget {
   const PlaySong({
@@ -47,6 +51,7 @@ class _PlaySongState extends State<PlaySong> {
 
   @override
   Widget build(BuildContext context) {
+     String newLyrics = 'Tap the button to get the Lyrics';
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -213,8 +218,17 @@ class _PlaySongState extends State<PlaySong> {
                             size: 30,
                             color: Colors.white,
                           )),
+                         
                     ],
                   ),
+                  SizedBox(height: 20,),
+                   Row(
+                    mainAxisAlignment:MainAxisAlignment.center,
+                    children: [
+                        IconButton(onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => Screen_Lyrics(SongTitile:widget.audioplayer.getCurrentAudioTitle, SongArtist: widget.audioplayer.getCurrentAudioArtist),));
+                        }, icon:Icon(Icons.lyrics,color: Colors.white,))
+                          ],)
                 ],
               ),
             );

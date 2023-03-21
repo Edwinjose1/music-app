@@ -1,4 +1,3 @@
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,13 +64,12 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ValueListenableBuilder(
                     valueListenable: PlaylistBox.listenable(),
                     builder: (context, value, child) {
-                      
-                     return Text(
-                      '${PlaylistBox.get('Favourites')!.toList().length} Songs',
-                      style: TextStyle(color: Color(0xFFC87DFF), fontSize: 15),
-                    );
+                      return Text(
+                        '${PlaylistBox.get('Favourites')!.toList().length} Songs',
+                        style:
+                            TextStyle(color: Color(0xFFC87DFF), fontSize: 15),
+                      );
                     },
-                    
                   ),
                 ],
               ),
@@ -83,9 +81,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   children: [
                     ValueListenableBuilder(
                       child: Text(
-                    '${PlaylistBox.get('Favourites')!.toList().length} Songs',
-                    style: TextStyle(color: Color(0xFFC87DFF), fontSize: 15),
-                  ),
+                        '${PlaylistBox.get('Favourites')!.toList().length} Songs',
+                        style:
+                            TextStyle(color: Color(0xFFC87DFF), fontSize: 15),
+                      ),
                       valueListenable: PlaylistBox.listenable(),
                       builder: (BuildContext context, Box<List> value,
                           Widget? child) {

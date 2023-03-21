@@ -10,11 +10,8 @@ class SongScreen extends StatefulWidget {
 }
 
 class _SongScreenState extends State<SongScreen> {
-bool playing = false;
-IconData playbtn=Icons.play_arrow;
-
-
-
+  bool playing = false;
+  IconData playbtn = Icons.play_arrow;
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +85,6 @@ IconData playbtn=Icons.play_arrow;
                       children: [
                         Row(
                           children: [
-                           
                             IconButton(
                                 onPressed: () {},
                                 iconSize: 45.0,
@@ -96,20 +92,17 @@ IconData playbtn=Icons.play_arrow;
                                 icon: Icon(
                                   Icons.skip_previous,
                                 )),
-                                 IconButton(
+                            IconButton(
                                 onPressed: () {
-                                  if(!playing)
-                                  {
+                                  if (!playing) {
                                     setState(() {
-                                      playbtn=Icons.pause;
-                                      playing=true;
+                                      playbtn = Icons.pause;
+                                      playing = true;
                                     });
-                                  }
-                                  else
-                                  {
-                                     setState(() {
-                                      playbtn=Icons.play_arrow;
-                                      playing=false;
+                                  } else {
+                                    setState(() {
+                                      playbtn = Icons.play_arrow;
+                                      playing = false;
                                     });
                                   }
                                 },
@@ -118,7 +111,7 @@ IconData playbtn=Icons.play_arrow;
                                 icon: Icon(
                                   Icons.play_arrow,
                                 )),
-                                 IconButton(
+                            IconButton(
                                 onPressed: () {},
                                 iconSize: 45.0,
                                 color: Colors.black,

@@ -1,15 +1,15 @@
 import 'package:hive/hive.dart';
 part 'song_model.g.dart';
+
 @HiveType(typeId: 0)
 class Songs extends HiveObject {
- 
   Songs(
       {required this.songPath,
       required this.songTitle,
       required this.songArtist,
       required this.songid,
-      this.flag=0});
- 
+      this.flag = 0});
+
   @HiveField(0)
   String songPath;
 
@@ -23,5 +23,5 @@ class Songs extends HiveObject {
   int? songid;
 
   @HiveField(4)
-   int? flag;
+  int? flag;
 }

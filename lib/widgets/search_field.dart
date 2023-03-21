@@ -30,7 +30,7 @@ class SearchField extends StatelessWidget {
         decoration: InputDecoration(
           prefixIcon: Icon(
             icon,
-            color:Colors.blue,
+            color: Colors.blue,
             size: 25,
           ),
           hintText: hintText,
@@ -49,7 +49,7 @@ class SearchField extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
             borderSide: const BorderSide(
               width: 1,
-              color:Colors.blue,
+              color: Colors.blue,
             ),
           ),
         ),

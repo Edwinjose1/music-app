@@ -337,7 +337,8 @@ popupsonginplaylist(
 
 editPlaylistname(
     {required BuildContext context, required String playlistname}) {
-  TextEditingController textEditingController = TextEditingController(text: playlistname);
+  TextEditingController textEditingController =
+      TextEditingController(text: playlistname);
   Box<List> playlistBox = getPlaylistBox();
 
   Future<void> createNewplaylistname() async {
@@ -348,11 +349,10 @@ editPlaylistname(
     }
     List<Songs> PlaylistSongs =
         playlistBox.get(playlistname)!.toList().cast<Songs>();
-        songList=PlaylistSongs;
-        await playlistBox.put(playlistName, songList);
-        await playlistBox.delete(playlistname);
-        Navigator.of(context).pop();
-        
+    songList = PlaylistSongs;
+    await playlistBox.put(playlistName, songList);
+    await playlistBox.delete(playlistname);
+    Navigator.of(context).pop();
   }
 
   return showDialog(
